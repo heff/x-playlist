@@ -1,0 +1,18 @@
+{
+  "name": "x-playlist",
+  "version": "0.0.0",
+  "description": "a simple web component custom element for playing through a list of video or audio elements.",
+  "license": "MIT",
+  "main": "src/x-playlist.html",
+  "keywords": [
+    "web-components", "playlist", "video", "audio", "media"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {
+    "webcomponentsjs": "^0.5.1"
+  }
+}

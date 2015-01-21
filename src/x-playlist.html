@@ -1,0 +1,108 @@
+<script>
+(function() {
+    // Creates an object based in the HTML Element prototype
+    var element = Object.create(HTMLElement.prototype);
+
+    // Fires when an instance of the element is created
+    element.createdCallback = function() {
+      var _playlist = this;
+      var _currentMedia = null;
+
+      function handleCurrentEnded(){
+        _playlist.next();
+      }
+
+      Object.defineProperty(this, 'currentMedia', {
+        get: function() {
+          return _currentMedia;
+        },
+        set: function(mediaElement) {
+          // Tear down the previous media element
+          if (_currentMedia) {
+            _currentMedia.removeAttribute('current');
+            _currentMedia.removeEventListener('ended', handleCurrentEnded);
+            _currentMedia.pause();
+            _currentMedia.currentTime = 0;
+          }
+
+          // Load the supplied media element
+          _currentMedia = mediaElement;
+          if (_currentMedia) {
+            _currentMedia.setAttribute('current', '');
+            _currentMedia.addEventListener('ended', handleCurrentEnded);
+          }
+        }
+      });
+
+      // Select the first media element in the list
+      this.currentMedia = this.querySelector('video,audio');
+    };
+
+    // Go to the next media element in the list
+    element.next = function() {
+      // Get all media elements and convert to an array
+      var medias = Array.prototype.slice.call(this.querySelectorAll('video,audio'));
+      var nextSib = medias[medias.indexOf(this.currentMedia) + 1];
+
+      // If looping get the first
+      if (!nextSib && this.getAttribute('loop') !== null) {
+        nextSib = medias[0];
+      }
+
+      if (nextSib) {
+        this.currentMedia = nextSib;
+        nextSib.play();
+      } else {
+        this.currentMedia = null;
+        this.dispatchEvent(new Event('ended'));
+      }
+    };
+
+    // Go to the previous media element in the list
+    element.previous = function() {
+      // Get all media elements and convert to an array
+      var medias = Array.prototype.slice.call(this.querySelectorAll('video,audio'));
+      var prevSib = medias[medias.indexOf(this.currentMedia) - 1];
+
+      // If looping get the first
+      if (!prevSib && this.getAttribute('loop') !== null) {
+        prevSib = medias[medias.length - 1];
+      }
+
+      if (prevSib) {
+        this.currentMedia = prevSib;
+        prevSib.play();
+      }
+    };
+
+    document.registerElement('x-playlist', {
+      prototype: element
+    });
+
+}());
+</script>
+
+<style>
+
+x-playlist {
+  display: inline-block;
+  position: relative;
+  min-width: 300px;
+  min-height: 150px;
+  background: linear-gradient(135deg, #333 0%, #000 100%);
+}
+
+x-playlist video,
+x-playlist audio {
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+x-playlist video[current],
+x-playlist audio[current] {
+  display: block;
+}
+
+</style>

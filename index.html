@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>&lt;x-playlist&gt;</title>
+
+    <!-- Importing Web Component's Polyfill -->
+    <script src="bower_components/webcomponentsjs/webcomponents.min.js"></script>
+
+    <!-- Importing Custom Elements -->
+    <link rel="import" href="src/x-playlist.html">
+</head>
+<body>
+
+    <!-- Using Custom Elements -->
+    <x-playlist loop>
+      <video src="http://techslides.com/demos/sample-videos/small.mp4" controls preload="none"></video>
+      <video src="http://vjs.zencdn.net/v/oceans.mp4" controls preload="none"></video>
+      <audio src="http://www.tonycuffe.com/mp3/tailtoddle_lo.mp3" controls preload="none"></video>
+
+    </x-playlist>
+
+    <br>
+
+    <button onclick="document.querySelector('x-playlist').previous()">Previous</button>
+    <button onclick="document.querySelector('x-playlist').next()">Next</button>
+
+</body>
+</html>
