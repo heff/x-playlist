@@ -12,18 +12,21 @@
 </head>
 <body>
 
+    <h1>&lt;x-playlist&gt;</h1>
+
     <!-- Using Custom Elements -->
     <x-playlist loop>
       <video src="http://techslides.com/demos/sample-videos/small.mp4" controls preload="none"></video>
       <video src="http://vjs.zencdn.net/v/oceans.mp4" controls preload="none"></video>
       <audio src="http://www.tonycuffe.com/mp3/tailtoddle_lo.mp3" controls preload="none"></video>
-
     </x-playlist>
 
     <br>
 
+    <!-- Simple buttons that use the x-playlist API -->
     <button onclick="document.querySelector('x-playlist').previous()">Previous</button>
     <button onclick="document.querySelector('x-playlist').next()">Next</button>
 
+    <p><a href="https://github.com/heff/x-playlist">View the source</a></p>
 </body>
 </html>
