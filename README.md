@@ -1,6 +1,6 @@
 # &lt;x-playlist&gt;
 
-> a simple [web component](http://webcomponents.org) [custom element](http://w3c.github.io/webcomponents/spec/custom/) for playing through a list of video or audio elements.
+> A simple [web component](http://webcomponents.org) [custom element](http://w3c.github.io/webcomponents/spec/custom/) for playing through a list of video and/or audio elements.
 
 ## Demo
 
@@ -33,26 +33,25 @@ Or [download as ZIP](https://github.com/heff/x-playlist/archive/master.zip).
 3. Start using it!
 
     ```html
-    <x-playlist></x-playlist>
+    <x-playlist>
+        <video src="my_video_1.mp4" controls preload="none">
+        <video src="my_video_2.mp4" controls preload="none">
+        <audio src="my_audio_1.mp3" controls preload="none">
+    </x-playlist>
     ```
 
 ## Options
 
 Attribute     | Options     | Default      | Description
 ---           | ---         | ---          | ---
-`foo`         | *string*    | `bar`        | Lorem ipsum dolor.
+`loop`        | *boolean*   | `false`      | Loop back to the first media at the end
 
 ## Methods
 
 Method        | Parameters   | Returns     | Description
 ---           | ---          | ---         | ---
-`unicorn()`   | None.        | Nothing.    | Magic stuff appears.
-
-## Events
-
-Event         | Description
----           | ---
-`onsomething` | Triggers when something happens.
+`previous()`  | None.        | Nothing.    | Play the previous media element
+`next()`      | None.        | Nothing.    | Play the next media element
 
 ## Development
 
